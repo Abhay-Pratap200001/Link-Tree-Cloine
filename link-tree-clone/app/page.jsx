@@ -1,6 +1,16 @@
-import React from "react";
+"use client";
 
-const page = () => {
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+
+const Home = () => {
+
+  const router = useRouter()
+  const [text, setText] = useState("");
+
+  const createTree = () => {
+    router.push(`/generate?handle=${text}`)
+  };
   return (
     <main>
       <section className="bg-[#d2e823] min-h-[100vh] grid grid-cols-2">
@@ -17,11 +27,16 @@ const page = () => {
 
           <div className="input flex gap-2 relative top-10">
             <input
+              value={text}
+              onChange={(e) => setText(e.target.value)}
               type="text"
-              placeholder="linktr.ee/"
+              placeholder="Enter your handle"
               className="bg-white px-2 py-2 w-[14vw] rounded-md focus:outline-white"
             />
-            <button className="p-3 w-[13vw] h-[4vw] rounded-full bg-[#254f1a] text-white font-medium">
+            <button
+              onClick={()=>createTree()}
+              className="p-3 w-[13vw] h-[4vw] rounded-full bg-[#254f1a] text-white font-medium"
+            >
               Get started for free
             </button>
           </div>
@@ -33,4 +48,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Home;
